@@ -3,6 +3,8 @@ import Hero from './Hero';
 import Logo from './Logo';
 import Main from './Main';
 import Nav from './Nav';
+import Products from './Products';
+import Shop from './Shop';
 import UserProfile from './UserProfile';
 
 function App() {
@@ -15,7 +17,10 @@ function App() {
       </Header>
 
       <Main>
-        <Hero />
+        {/* <Hero /> */}
+        <Shop>
+          <Products />
+        </Shop>
       </Main>
     </div>
   );

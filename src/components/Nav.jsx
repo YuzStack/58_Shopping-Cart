@@ -2,7 +2,7 @@ import { ShoppingBag } from 'lucide-react';
 
 function Nav() {
   return (
-    <nav className='flex items-center gap-6'>
+    <nav className='z-50 flex items-center gap-6'>
       <button className='cursor-pointer text-sm font-semibold tracking-wide text-neutral-500'>
         Home
       </button>

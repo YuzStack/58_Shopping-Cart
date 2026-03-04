@@ -24,7 +24,7 @@ function Product({ product }) {
 
   return (
     <li className='max-w-90 rounded-xl bg-white shadow-xl'>
-      <div className=''>
+      <div>
         <img
           src={product.image}
           alt={product.title}
@@ -44,10 +44,10 @@ function Product({ product }) {
           </div>
         </div>
 
-        <div className='my-3 flex h-10 overflow-hidden rounded-full border border-gray-200'>
+        <div className='my-3 flex h-10 min-w-30 overflow-hidden rounded-full border border-gray-200'>
           <button
             onClick={handleDecreaseQuantity}
-            className='h-full min-w-10 cursor-pointer border-r border-e-neutral-300 px-4 text-2xl text-neutral-400 transition-colors hover:text-black'
+            className='h-full min-w-10 border-r border-neutral-300 px-4 text-2xl text-neutral-400 transition-colors hover:text-black'
           >
             -
           </button>
@@ -55,17 +55,17 @@ function Product({ product }) {
             type='number'
             value={quantity}
             onChange={handleChangeQuantity}
-            className='flex-1 [appearance:textfield] px-2 text-center focus:outline-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
+            className='w-full flex-1 [appearance:textfield] px-2 text-center focus:outline-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
           />
           <button
             onClick={handleIncreaseQuantity}
-            className='h-full min-w-10 cursor-pointer border-l border-neutral-300 px-4 text-2xl text-neutral-400 transition-colors hover:text-black'
+            className='h-full min-w-10 border-l border-neutral-300 px-4 text-2xl text-neutral-400 transition-colors hover:text-black'
           >
             +
           </button>
         </div>
 
-        <button className='bg-primary-accent w-full cursor-pointer rounded-xl p-2 text-white transition-all hover:scale-101 hover:bg-teal-400'>
+        <button className='bg-primary-accent w-full rounded-xl p-2 text-white transition-all hover:scale-101 hover:bg-teal-400'>
           Add to Cart
         </button>
       </div>

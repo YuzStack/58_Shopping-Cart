@@ -1,8 +1,11 @@
+import Cart from './Cart';
+import CartItems from './CartItems';
 import Header from './Header';
 import Hero from './Hero';
 import Logo from './Logo';
 import Main from './Main';
 import Nav from './Nav';
+import OrderSummary from './OrderSummary';
 import Products from './Products';
 import Shop from './Shop';
 import UserProfile from './UserProfile';
@@ -18,9 +21,15 @@ function App() {
 
       <Main>
         {/* <Hero /> */}
-        <Shop>
+
+        {/* <Shop>
           <Products />
-        </Shop>
+        </Shop> */}
+
+        <Cart>
+          <CartItems />
+          <OrderSummary />
+        </Cart>
       </Main>
     </div>
   );

@@ -10,7 +10,7 @@ function Hero() {
             Thoughtfully curated goods designed to bring beauty and function to
             your daily rituals.
           </p>
-          <button className='bg-primary-accent mx-auto mt-6 flex cursor-pointer rounded-lg px-8 py-4 font-semibold text-white transition-all duration-200 hover:scale-102 hover:bg-teal-400'>
+          <button className='bg-primary-accent mx-auto mt-6 flex rounded-lg px-8 py-4 font-semibold text-white transition-all duration-200 hover:scale-102 hover:bg-teal-400'>
             Shop Now
           </button>
         </div>

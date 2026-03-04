@@ -2,11 +2,15 @@
 @import 'tailwindcss';
 
 body {
-  background-color: #F5F6F7;
-  color: #0A0A0A;
-  font-family: "Inter", sans-serif;
+  background-color: #f5f6f7;
+  color: #0a0a0a;
+  font-family: 'Inter', sans-serif;
+}
+
+button {
+  cursor: pointer;
 }
 
 @theme {
-  --color-primary-accent: #00BBA4;
+  --color-primary-accent: #00bba4;
 }

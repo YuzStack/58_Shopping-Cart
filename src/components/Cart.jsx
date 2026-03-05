@@ -4,7 +4,13 @@ import OrderSummary from './OrderSummary';
 import EmptyCart from './EmptyCart';
 
 function Cart() {
-  const { cart } = useOutletContext();
+  const {
+    cart,
+    handleRemoveFromCart,
+    handleIncreaseQuantity,
+    handleDecreaseQuantity,
+    handleChangeQuantity,
+  } = useOutletContext();
 
   return (
     <section className='container mx-auto h-[calc(100vh-64px)] px-4 py-6 lg:px-8 lg:py-12'>
@@ -14,7 +20,13 @@ function Cart() {
           <EmptyCart />
         ) : (
           <>
-            <CartItems cart={cart} />
+            <CartItems
+              cart={cart}
+              onRemoveFromCart={handleRemoveFromCart}
+              onIncreaseQuantity={handleIncreaseQuantity}
+              onDecreaseQuantity={handleDecreaseQuantity}
+              onChangeQuantity={handleChangeQuantity}
+            />
             <OrderSummary cart={cart} />
           </>
         )}

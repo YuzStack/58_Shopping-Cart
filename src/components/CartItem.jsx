@@ -1,26 +1,33 @@
 import { Trash2 } from 'lucide-react';
-import { useState } from 'react';
 
-function CartItem({ item }) {
-  const [quantity, setQuantity] = useState(1);
+function CartItem({
+  item,
+  onRemoveFromCart,
+  onIncreaseQuantity,
+  onDecreaseQuantity,
+  onChangeQuantity,
+}) {
+  const handleRemoveFromCart = function () {
+    onRemoveFromCart(item.id);
+  };
+
+  const handleIncreaseQuantity = function () {
+    if (item.quantity === 99) return;
+    onIncreaseQuantity(item.id);
+  };
+
+  const handleDecreaseQuantity = function () {
+    if (item.quantity === 1) return;
+    onDecreaseQuantity(item.id);
+  };
 
   const handleChangeQuantity = function (e) {
     const value = Number(e.target.value);
 
-    if (value < 1) return setQuantity(1);
-    if (value > 99) return setQuantity(99);
+    if (value < 1) return onChangeQuantity(item.id, 1);
+    if (value > 99) return onChangeQuantity(item.id, 99);
 
-    setQuantity(value);
-  };
-
-  const handleDecreaseQuantity = function () {
-    if (quantity === 1) return;
-    setQuantity(curQuantity => curQuantity - 1);
-  };
-
-  const handleIncreaseQuantity = function () {
-    if (quantity === 99) return;
-    setQuantity(curQuantity => curQuantity + 1);
+    onChangeQuantity(item.id, value);
   };
 
   return (
@@ -51,7 +58,7 @@ function CartItem({ item }) {
           </button>
           <input
             type='number'
-            value={quantity}
+            value={item.quantity}
             onChange={handleChangeQuantity}
             className='w-10 [appearance:textfield] px-2 text-center focus:outline-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
           />
@@ -62,7 +69,10 @@ function CartItem({ item }) {
             +
           </button>
         </div>
-        <button className='text-neutral-400 transition-colors hover:text-neutral-600'>
+        <button
+          onClick={handleRemoveFromCart}
+          className='text-neutral-400 transition-colors hover:text-neutral-600'
+        >
           <Trash2 size={20} />
         </button>
       </div>

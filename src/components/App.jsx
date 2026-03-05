@@ -1,5 +1,6 @@
 import Cart from './Cart';
 import CartItems from './CartItems';
+import EmptyCart from './EmptyCart';
 import Header from './Header';
 import Hero from './Hero';
 import Logo from './Logo';
@@ -26,10 +27,11 @@ function App() {
           <Products />
         </Shop> */}
 
-        <Cart>
+        {/* <Cart>
           <CartItems />
           <OrderSummary />
-        </Cart>
+          <EmptyCart />
+        </Cart> */}
       </Main>
     </div>
   );

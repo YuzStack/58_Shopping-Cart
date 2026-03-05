@@ -1,7 +1,9 @@
 import { ShoppingBag } from 'lucide-react';
 import { NavLink } from 'react-router';
 
-function Nav({ numCartItems }) {
+function Nav({ cart }) {
+  const numCartItems = cart.reduce((acc, cur) => acc + cur.quantity, 0);
+
   const styleNavLink = function ({ isActive }) {
     return `${isActive ? 'text-black' : ''} transition-colors hover:text-primary-accent`;
   };

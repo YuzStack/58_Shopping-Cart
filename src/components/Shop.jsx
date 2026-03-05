@@ -3,6 +3,8 @@ import Products from './Products';
 
 function Shop() {
   const {
+    products,
+    setProducts,
     handleAddToCart,
     handleRemoveFromCart,
     handleIncreaseQuantity,
@@ -17,6 +19,8 @@ function Shop() {
         Browse our collection of curated lifestyle essentials.
       </p>
       <Products
+        products={products}
+        setProducts={setProducts}
         onAddToCart={handleAddToCart}
         onRemoveFromCart={handleRemoveFromCart}
         onIncreaseQuantity={handleIncreaseQuantity}

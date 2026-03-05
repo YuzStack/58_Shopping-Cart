@@ -1,24 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Product from './Product';
 
 function Products({
+  products,
+  setProducts,
   onAddToCart,
   onRemoveFromCart,
   onIncreaseQuantity,
   onDecreaseQuantity,
   onChangeQuantity,
 }) {
-  const [products, setProducts] = useState([]);
+  useEffect(
+    function () {
+      async function fetchProducts() {
+        const response = await fetch('https://fakestoreapi.com/products');
+        const data = await response.json();
+        setProducts(
+          data.map(datum => ({ ...datum, quantity: 1, isAddedToCart: false })),
+        );
+      }
 
-  useEffect(function () {
-    async function fetchProducts() {
-      const response = await fetch('https://fakestoreapi.com/products');
-      const data = await response.json();
-      setProducts(data);
-    }
-
-    fetchProducts();
-  }, []);
+      products.length === 0 && fetchProducts();
+    },
+    [products, setProducts],
+  );
 
   return (
     <ul className='mt-6 grid justify-center gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>

@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 function Product({
   product,
   onAddToCart,
@@ -8,39 +6,31 @@ function Product({
   onDecreaseQuantity,
   onChangeQuantity,
 }) {
-  const [quantity, setQuantity] = useState(1);
-  const [isAddedToCart, setIsAddedToCart] = useState(false);
-
-  const handleChangeQuantity = function (e) {
-    const value = Number(e.target.value);
-
-    if (value < 1) return setQuantity(1);
-    if (value > 99) return setQuantity(99);
-
-    setQuantity(value);
-    isAddedToCart && onChangeQuantity(product.id, value);
-  };
-
-  const handleDecreaseQuantity = function () {
-    if (quantity === 1) return;
-    setQuantity(curQuantity => curQuantity - 1);
-    isAddedToCart && onDecreaseQuantity(product.id);
-  };
-
-  const handleIncreaseQuantity = function () {
-    if (quantity === 99) return;
-    setQuantity(curQuantity => curQuantity + 1);
-    isAddedToCart && onIncreaseQuantity(product.id);
-  };
-
   const handleAddToCart = function () {
-    onAddToCart({ ...product, quantity });
-    setIsAddedToCart(true);
+    onAddToCart({ ...product, isAddedToCart: true }, product.id);
   };
 
   const handleRemoveFromCart = function () {
     onRemoveFromCart(product.id);
-    setIsAddedToCart(false);
+  };
+
+  const handleIncreaseQuantity = function () {
+    if (product.quantity === 99) return;
+    onIncreaseQuantity(product.id);
+  };
+
+  const handleDecreaseQuantity = function () {
+    if (product.quantity === 1) return;
+    onDecreaseQuantity(product.id);
+  };
+
+  const handleChangeQuantity = function (e) {
+    const value = Number(e.target.value);
+
+    if (value < 1) return onChangeQuantity(product.id, 1);
+    if (value > 99) return onChangeQuantity(product.id, 99);
+
+    onChangeQuantity(product.id, value);
   };
 
   return (
@@ -74,7 +64,7 @@ function Product({
           </button>
           <input
             type='number'
-            value={quantity}
+            value={product.quantity}
             onChange={handleChangeQuantity}
             className='w-full flex-1 [appearance:textfield] px-2 text-center focus:outline-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
           />
@@ -86,7 +76,7 @@ function Product({
           </button>
         </div>
 
-        {isAddedToCart ? (
+        {product.isAddedToCart ? (
           <button
             onClick={handleRemoveFromCart}
             className='w-full rounded-xl border border-neutral-300 p-2 text-neutral-500 transition-colors hover:border-neutral-400 hover:text-neutral-600'

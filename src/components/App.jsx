@@ -7,21 +7,44 @@ import UserProfile from './UserProfile';
 import { useState } from 'react';
 
 function App() {
+  const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
 
-  const numCartItems = cart.reduce((acc, cur) => acc + cur.quantity, 0);
-
-  const handleAddToCart = function (product) {
+  const handleAddToCart = function (product, productId) {
     setCart(curCart => [...curCart, product]);
+
+    setProducts(curProducts =>
+      curProducts.map(product =>
+        product.id === productId
+          ? { ...product, isAddedToCart: true }
+          : product,
+      ),
+    );
   };
 
   const handleRemoveFromCart = function (productId) {
     setCart(curCart => curCart.filter(product => product.id !== productId));
+
+    setProducts(curProducts =>
+      curProducts.map(product =>
+        product.id === productId
+          ? { ...product, isAddedToCart: false }
+          : product,
+      ),
+    );
   };
 
   const handleIncreaseQuantity = function (productId) {
     setCart(curCart =>
       curCart.map(product =>
+        product.id === productId
+          ? { ...product, quantity: product.quantity + 1 }
+          : product,
+      ),
+    );
+
+    setProducts(curProducts =>
+      curProducts.map(product =>
         product.id === productId
           ? { ...product, quantity: product.quantity + 1 }
           : product,
@@ -37,11 +60,27 @@ function App() {
           : product,
       ),
     );
+
+    setProducts(curProducts =>
+      curProducts.map(product =>
+        product.id === productId
+          ? { ...product, quantity: product.quantity - 1 }
+          : product,
+      ),
+    );
   };
 
   const handleChangeQuantity = function (productId, newQuantity) {
     setCart(curCart =>
       curCart.map(product =>
+        product.id === productId
+          ? { ...product, quantity: newQuantity }
+          : product,
+      ),
+    );
+
+    setProducts(curProducts =>
+      curProducts.map(product =>
         product.id === productId
           ? { ...product, quantity: newQuantity }
           : product,
@@ -53,13 +92,15 @@ function App() {
     <div>
       <Header>
         <Logo />
-        <Nav numCartItems={numCartItems} />
+        <Nav cart={cart} />
         <UserProfile />
       </Header>
 
       <Main>
         <Outlet
           context={{
+            products,
+            setProducts,
             cart,
             handleAddToCart,
             handleRemoveFromCart,

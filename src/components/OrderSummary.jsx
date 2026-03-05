@@ -1,4 +1,9 @@
-function OrderSummary() {
+function OrderSummary({ cart }) {
+  const cartTotal = cart.reduce(
+    (acc, cur) => acc + cur.price * cur.quantity,
+    0,
+  );
+
   return (
     <div className='rounded-lg border border-[#DEE1E4] bg-white p-4 shadow-lg md:p-6 lg:col-span-3'>
       <h2 className='mb-4 text-xl font-semibold'>Order Summary</h2>
@@ -8,7 +13,7 @@ function OrderSummary() {
           <span className='text-sm text-neutral-400 lg:text-base'>
             Subtotal
           </span>
-          <span className=''>$323.97</span>
+          <span className=''>${cartTotal.toFixed(2)}</span>
         </div>
         <div className='flex items-center justify-between'>
           <span className='text-sm text-neutral-400 lg:text-base'>
@@ -20,7 +25,9 @@ function OrderSummary() {
 
       <div className='my-4 flex items-center justify-between'>
         <span className='text-base font-semibold lg:text-lg'>Total</span>
-        <span className='text-base font-semibold lg:text-lg'>$323.97</span>
+        <span className='text-base font-semibold lg:text-lg'>
+          ${cartTotal.toFixed(2)}
+        </span>
       </div>
 
       <button className='bg-primary-accent mb-2 w-full rounded-lg p-2 text-white transition-all hover:scale-101 hover:bg-teal-400'>

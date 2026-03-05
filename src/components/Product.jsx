@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
-function Product({ product }) {
+function Product({ product, onAddToCart, onRemoveFromCart }) {
   const [quantity, setQuantity] = useState(1);
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
 
   const handleChangeQuantity = function (e) {
     const value = Number(e.target.value);
@@ -20,6 +21,16 @@ function Product({ product }) {
   const handleIncreaseQuantity = function () {
     if (quantity === 99) return;
     setQuantity(curQuantity => curQuantity + 1);
+  };
+
+  const handleAddToCart = function () {
+    onAddToCart({ ...product, quantity });
+    setIsAddedToCart(true);
+  };
+
+  const handleRemoveFromCart = function () {
+    onRemoveFromCart(product.id);
+    setIsAddedToCart(false);
   };
 
   return (
@@ -65,9 +76,21 @@ function Product({ product }) {
           </button>
         </div>
 
-        <button className='bg-primary-accent w-full rounded-xl p-2 text-white transition-all hover:scale-101 hover:bg-teal-400'>
-          Add to Cart
-        </button>
+        {isAddedToCart ? (
+          <button
+            onClick={handleRemoveFromCart}
+            className='w-full rounded-xl border border-neutral-300 p-2 text-neutral-500 transition-colors hover:border-neutral-400 hover:text-neutral-600'
+          >
+            Remove From Cart
+          </button>
+        ) : (
+          <button
+            onClick={handleAddToCart}
+            className='bg-primary-accent border-primary-accent w-full rounded-xl border p-2 text-white transition-all hover:scale-101 hover:border-teal-400 hover:bg-teal-400'
+          >
+            Add to Cart
+          </button>
+        )}
       </div>
     </li>
   );

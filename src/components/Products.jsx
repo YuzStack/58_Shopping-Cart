@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Product from './Product';
 
-function Products() {
+function Products({ onAddToCart, onRemoveFromCart }) {
   const [products, setProducts] = useState([]);
 
   useEffect(function () {
@@ -17,7 +17,12 @@ function Products() {
   return (
     <ul className='mt-6 grid justify-center gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
       {products.map(product => (
-        <Product key={product.id} product={product} />
+        <Product
+          key={product.id}
+          product={product}
+          onAddToCart={onAddToCart}
+          onRemoveFromCart={onRemoveFromCart}
+        />
       ))}
     </ul>
   );

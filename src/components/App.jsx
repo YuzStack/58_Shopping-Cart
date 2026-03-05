@@ -1,40 +1,34 @@
 import { Outlet } from 'react-router';
-import Cart from './Cart';
-import CartItems from './CartItems';
-import EmptyCart from './EmptyCart';
 import Header from './Header';
-import Hero from './Hero';
 import Logo from './Logo';
 import Main from './Main';
 import Nav from './Nav';
-import OrderSummary from './OrderSummary';
-import Products from './Products';
-import Shop from './Shop';
 import UserProfile from './UserProfile';
+import { useState } from 'react';
 
 function App() {
+  const [cart, setCart] = useState([]);
+
+  const numCartItems = cart.reduce((acc, cur) => acc + cur.quantity, 0);
+
+  const handleAddToCart = function (product) {
+    setCart(curCart => [...curCart, product]);
+  };
+
+  const handleRemoveFromCart = function (productId) {
+    setCart(curCart => curCart.filter(product => product.id !== productId));
+  };
+
   return (
     <div>
       <Header>
         <Logo />
-        <Nav />
+        <Nav numCartItems={numCartItems} />
         <UserProfile />
       </Header>
 
       <Main>
-        <Outlet />
-
-        {/* <Hero /> */}
-
-        {/* <Shop>
-          <Products />
-        </Shop> */}
-
-        {/* <Cart>
-          <CartItems />
-          <OrderSummary />
-          <EmptyCart />
-        </Cart> */}
+        <Outlet context={{ cart, handleAddToCart, handleRemoveFromCart }} />
       </Main>
     </div>
   );

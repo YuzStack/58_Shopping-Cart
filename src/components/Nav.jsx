@@ -1,7 +1,7 @@
 import { ShoppingBag } from 'lucide-react';
 import { NavLink } from 'react-router';
 
-function Nav() {
+function Nav({ numCartItems }) {
   const styleNavLink = function ({ isActive }) {
     return `${isActive ? 'text-black' : ''} transition-colors hover:text-primary-accent`;
   };
@@ -22,7 +22,7 @@ function Nav() {
         <NavLink to='/cart' className={styleNavLink}>
           <ShoppingBag />
           <span className='bg-primary-accent absolute -top-[50%] left-[50%] flex h-6 w-6 items-center justify-center rounded-full text-white'>
-            5
+            {numCartItems}
           </span>
         </NavLink>
       </button>

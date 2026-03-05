@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router';
 import Cart from './Cart';
 import CartItems from './CartItems';
 import EmptyCart from './EmptyCart';
@@ -21,6 +22,8 @@ function App() {
       </Header>
 
       <Main>
+        <Outlet />
+
         {/* <Hero /> */}
 
         {/* <Shop>

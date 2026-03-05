@@ -23,9 +23,11 @@ function Nav({ cart }) {
       <button className='relative text-sm font-semibold tracking-wide text-neutral-500'>
         <NavLink to='/cart' className={styleNavLink}>
           <ShoppingBag />
-          <span className='bg-primary-accent absolute -top-[50%] left-[50%] flex h-6 w-6 items-center justify-center rounded-full text-white'>
-            {numCartItems}
-          </span>
+          {numCartItems > 0 && (
+            <span className='bg-primary-accent absolute -top-[50%] left-[50%] flex h-6 w-6 items-center justify-center rounded-full text-white'>
+              {numCartItems}
+            </span>
+          )}
         </NavLink>
       </button>
     </nav>

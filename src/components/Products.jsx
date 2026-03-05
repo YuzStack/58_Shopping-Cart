@@ -1,7 +1,13 @@
 import { useEffect, useState } from 'react';
 import Product from './Product';
 
-function Products({ onAddToCart, onRemoveFromCart }) {
+function Products({
+  onAddToCart,
+  onRemoveFromCart,
+  onIncreaseQuantity,
+  onDecreaseQuantity,
+  onChangeQuantity,
+}) {
   const [products, setProducts] = useState([]);
 
   useEffect(function () {
@@ -22,6 +28,9 @@ function Products({ onAddToCart, onRemoveFromCart }) {
           product={product}
           onAddToCart={onAddToCart}
           onRemoveFromCart={onRemoveFromCart}
+          onIncreaseQuantity={onIncreaseQuantity}
+          onDecreaseQuantity={onDecreaseQuantity}
+          onChangeQuantity={onChangeQuantity}
         />
       ))}
     </ul>

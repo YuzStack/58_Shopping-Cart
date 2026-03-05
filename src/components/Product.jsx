@@ -1,6 +1,13 @@
 import { useState } from 'react';
 
-function Product({ product, onAddToCart, onRemoveFromCart }) {
+function Product({
+  product,
+  onAddToCart,
+  onRemoveFromCart,
+  onIncreaseQuantity,
+  onDecreaseQuantity,
+  onChangeQuantity,
+}) {
   const [quantity, setQuantity] = useState(1);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
 
@@ -11,16 +18,19 @@ function Product({ product, onAddToCart, onRemoveFromCart }) {
     if (value > 99) return setQuantity(99);
 
     setQuantity(value);
+    isAddedToCart && onChangeQuantity(product.id, value);
   };
 
   const handleDecreaseQuantity = function () {
     if (quantity === 1) return;
     setQuantity(curQuantity => curQuantity - 1);
+    isAddedToCart && onDecreaseQuantity(product.id);
   };
 
   const handleIncreaseQuantity = function () {
     if (quantity === 99) return;
     setQuantity(curQuantity => curQuantity + 1);
+    isAddedToCart && onIncreaseQuantity(product.id);
   };
 
   const handleAddToCart = function () {

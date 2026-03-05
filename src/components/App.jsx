@@ -19,6 +19,36 @@ function App() {
     setCart(curCart => curCart.filter(product => product.id !== productId));
   };
 
+  const handleIncreaseQuantity = function (productId) {
+    setCart(curCart =>
+      curCart.map(product =>
+        product.id === productId
+          ? { ...product, quantity: product.quantity + 1 }
+          : product,
+      ),
+    );
+  };
+
+  const handleDecreaseQuantity = function (productId) {
+    setCart(curCart =>
+      curCart.map(product =>
+        product.id === productId
+          ? { ...product, quantity: product.quantity - 1 }
+          : product,
+      ),
+    );
+  };
+
+  const handleChangeQuantity = function (productId, newQuantity) {
+    setCart(curCart =>
+      curCart.map(product =>
+        product.id === productId
+          ? { ...product, quantity: newQuantity }
+          : product,
+      ),
+    );
+  };
+
   return (
     <div>
       <Header>
@@ -28,7 +58,16 @@ function App() {
       </Header>
 
       <Main>
-        <Outlet context={{ cart, handleAddToCart, handleRemoveFromCart }} />
+        <Outlet
+          context={{
+            cart,
+            handleAddToCart,
+            handleRemoveFromCart,
+            handleIncreaseQuantity,
+            handleDecreaseQuantity,
+            handleChangeQuantity,
+          }}
+        />
       </Main>
     </div>
   );

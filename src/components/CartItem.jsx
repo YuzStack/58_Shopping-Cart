@@ -31,7 +31,7 @@ function CartItem({
   };
 
   return (
-    <li className='flex items-center justify-between rounded-xl border border-[#DEE1E4] bg-white p-4 shadow-sm'>
+    <li className='flex flex-col justify-between gap-3 rounded-xl border border-[#DEE1E4] bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:gap-0'>
       <div className='flex items-center gap-3'>
         <img
           src={item.image}
@@ -40,7 +40,9 @@ function CartItem({
         />
         <div className='flex flex-col gap-0.5'>
           <span className='text-neutral-400'>{item.category}</span>
-          <h3 className='max-w-70 truncate lg:max-w-100'>{item.title}</h3>
+          <h3 className='max-w-50 truncate sm:max-w-70 lg:max-w-100'>
+            {item.title}
+          </h3>
           <p className='font-semibold'>${item.price}</p>
           <span className='text-sm text-neutral-400'>
             ⭐️ {item.rating.rate} ({item.rating.count})
@@ -48,7 +50,7 @@ function CartItem({
         </div>
       </div>
 
-      <div className='flex items-center gap-6'>
+      <div className='flex items-center gap-4 sm:gap-6'>
         <div className='flex h-8 w-30 overflow-hidden rounded-full border border-gray-200'>
           <button
             onClick={handleDecreaseQuantity}

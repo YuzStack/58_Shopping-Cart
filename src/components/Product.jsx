@@ -34,7 +34,7 @@ function Product({
   };
 
   return (
-    <li className='max-w-90 rounded-xl bg-white shadow-xl'>
+    <li className='max-w-90 rounded-xl bg-white shadow-xl transition-transform hover:scale-105'>
       <div>
         <img
           src={product.image}

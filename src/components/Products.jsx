@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useLoaderData } from 'react-router';
 import Product from './Product';
 
 function Products({
@@ -10,20 +10,13 @@ function Products({
   onDecreaseQuantity,
   onChangeQuantity,
 }) {
-  useEffect(
-    function () {
-      async function fetchProducts() {
-        const response = await fetch('https://fakestoreapi.com/products');
-        const data = await response.json();
-        setProducts(
-          data.map(datum => ({ ...datum, quantity: 1, isAddedToCart: false })),
-        );
-      }
-
-      products.length === 0 && fetchProducts();
-    },
-    [products, setProducts],
-  );
+  if (products.length === 0) {
+    /* eslint-disable */
+    const data = useLoaderData();
+    setProducts(
+      data.map(datum => ({ ...datum, quantity: 1, isAddedToCart: false })),
+    );
+  }
 
   return (
     <ul className='mt-6 grid justify-center gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
